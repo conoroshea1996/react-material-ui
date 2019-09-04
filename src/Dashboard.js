@@ -5,6 +5,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Paper } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
+
 
 
 
@@ -15,7 +18,8 @@ const useStyles = makeStyles(theme => ({
         margin: '40px',
     },
     flex: {
-        display: 'flex'
+        display: 'flex',
+        alignItems: 'center'
     },
     topicsWindow: {
         width: '30%',
@@ -23,7 +27,9 @@ const useStyles = makeStyles(theme => ({
         borderRight: 'solid 1px red'
     },
     chatWindow: {
-        width: '70%'
+        width: '70%',
+        height: '300px',
+        padding: '20px'
     },
     chatBox: {
         width: '85%'
@@ -50,14 +56,33 @@ export default function Dashboard() {
 
                     <div className={classes.topicsWindow}>
                         <List>
-                            <ListItem button>
-                                <ListItemText primary="Drafts" />
-                            </ListItem>
+                            {
+                                ['test'].map(topic => (
+                                    <ListItem button>
+                                        <ListItemText primary={topic} />
+                                    </ListItem>
+                                ))
+                            }
                         </List>
                     </div>
-                    <div className={classes.chatWindow}></div>
+                    <div className={classes.chatWindow}>
+                        {
+                            [{ from: 'bob', msg: 'hey you guys' }].map((chat, i) => (
+                                <div className={classes.flex}>
+                                    <Chip
+                                        label={chat.from}
+                                    />
+                                    <Typography variant='p'> {chat.msg}</Typography >
+                                </div>
+                            ))
+                        }
+                    </div>
                 </div>
-                <div className={classes.flex}></div>
+                <div className={classes.flex}>
+                    <Button variant="contained" color="primary" className={classes.button}>
+                        Primary
+                    </Button>
+                </div>
             </Paper>
 
         </div>
